@@ -21,6 +21,7 @@ public class Product {
         this.mainCharacteristics = mainCharacteristics;
     }
 
+
     public String getName() {
         return name;
     }
@@ -31,5 +32,8 @@ public class Product {
 
     public double getPrice() {
         return price;
+    }
+    public double getGuaranteePeriod(){
+        return guaranteePeriod;
     }
 }

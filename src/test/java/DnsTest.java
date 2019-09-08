@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import other.TestProperties;
 import other.Trash;
+import pages.BasketPage;
 import pages.MainPage;
 import pages.ProductPage;
 import pages.ResultsPage;
@@ -60,9 +61,8 @@ public class DnsTest {
     @Test
     public void checkDnsShop(){
         MainPage mainPage = new MainPage();
-        mainPage.search("playstation");
 
-        ResultsPage resultsPage = new ResultsPage();
+        ResultsPage resultsPage = mainPage.search("playstation");
         resultsPage.chooseProduct(TestProperties.getInstance().getProperty("product"));
 
         ProductPage productPage = new ProductPage();
@@ -75,9 +75,11 @@ public class DnsTest {
         ProductPage gameResultPage = new ProductPage();
         gameResultPage.savePriceOfCurrentProduct();
         gameResultPage.addToBasket();
+        gameResultPage.checkTotalPriceIs();
 
-        gameResultPage.checkPrice();
-
+        BasketPage basketPage = gameResultPage.goToBasket();
+        basketPage.checkGuarantee(TestProperties.getInstance().getProperty("product"));
+        basketPage.checkEveryPriceAndSum();
         /*
 
         BasketPage basketPage = productCard.goToBasket();
@@ -105,9 +107,9 @@ public class DnsTest {
  * + 9) запомнить цену
  * + 10) нажать купить
  * + 11) проверить что цена корзины стала равна сумме покупок
- * 12) перейри в корзину
- * 13) проверить, что для приставки выбрана гарантия на 2 года
- * 14) проверить цену каждого из товаров и сумму
+ * + 12) перейри в корзину
+ * + 13) проверить, что для приставки выбрана гарантия на 2 года
+ * + 14) проверить цену каждого из товаров и сумму
  * 15) удалить из корзины Detroit
  * 16) проверить что Detroit нет больше в корзине и что сумма уменьшилась на цену Detroit
  * 17) добавить еще 2 playstation (кнопкой +) и проверить что сумма верна (равна трем ценам playstation)

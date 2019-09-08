@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -24,6 +25,10 @@ public class Trash {
         return sum;
     }
 
+    public static ArrayList<Product> getProductsList (){
+        return productsList;
+    }
+
     public static String get(String key){
         return map.get(key);
     }
@@ -35,7 +40,8 @@ public class Trash {
     public static void addToList (Product product){
         productsList.add(product);
     }
-     public static void removeFromList (String productName){
+
+    public static void removeFromList (String productName){
          boolean flag = false;
          for (Product product : productsList) {
              if(product.getName().equals(productName)){
@@ -60,6 +66,26 @@ public class Trash {
              }
          }
      }
+
+    public static List<Product> findGuarantedElements(){
+        List<Product> guarantedElements = new ArrayList<Product>();
+        for (Product product : productsList) {
+            if (product.getGuaranteePeriod() > 0) {
+                guarantedElements.add(product);
+            }
+        }
+        return guarantedElements;
+    }
+
+    public static List<Product> findNotGuarantedElements(){
+        List<Product> guarantedElements = new ArrayList<Product>();
+        for (Product product : productsList) {
+            if (product.getGuaranteePeriod() == 0) {
+                guarantedElements.add(product);
+            }
+        }
+        return guarantedElements;
+    }
 
 
     public static String printMap(){

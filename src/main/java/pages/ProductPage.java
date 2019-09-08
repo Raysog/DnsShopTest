@@ -25,7 +25,7 @@ public class ProductPage extends BasePage {
     By mainCharacteristics = By.xpath("//div[@class='options-group']");
 
     By addGuarantee = By.xpath("//select[@class='form-control select']");
-    By goToBasket = By.xpath(".//a[@href='/cart']");
+
 
     By addedToBasketFlag = By.xpath("//button[@data-url='/order/begin/']");
 
@@ -42,7 +42,6 @@ public class ProductPage extends BasePage {
         wait.pollingEvery(1, TimeUnit.SECONDS);
         wait.until(ExpectedConditions.elementToBeClickable(addedToBasketFlag));
 
-        /*Integer.parseInt(driver.findElement(productPrice).getAttribute("data-price-value")),*/
 
         Trash.addToList(new Product(driver.findElement(productName).getText(),
                                     Double.parseDouble(Trash.get(driver.findElement(productName).getText())),
@@ -66,17 +65,8 @@ public class ProductPage extends BasePage {
         Trash.put(key, value);
     }
 
-    public void checkPrice(){
-        double actualPrice = Double.parseDouble(driver.findElement(By.xpath("//span[@data-of='totalPrice'][ancestor::div[@class='buttons']]")).getText().replace(" ", ""));
-        System.out.println("actual: " + actualPrice);
-        double expectedPrice = Trash.getBascketSum();
-        System.out.println("expected: " + expectedPrice);
-        assertEquals("Цены разные", expectedPrice, actualPrice, 0);
-        //assertEquals("Цены разные", expectedPrice, actualPrice);
-    }
 
-    /*public BasketPage goToBasket(){
-        driver.findElement(goToBasket).click();
-        return new BasketPage(driver);
-    }*/
+
+
+
 }
